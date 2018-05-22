@@ -1,0 +1,19 @@
+On Debian or Ubunu as the HV os
+
+<hidden state='on'/>
+will not work as a workaround for Nvidias Error 43.
+
+For that you need change the XML:
+
+replace first line with:
+
+<domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+
+append:
+
+<qemu:commandline>
+    <qemu:arg value='-cpu'/>
+    <qemu:arg value='host,hv_time,kvm=off,hv_vendor_id=null'/>
+  </qemu:commandline>
+
+just before the closing </domain> tag.
